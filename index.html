@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KASTRA - Sistem Kasir Modern untuk UMKM. Kelola transaksi, stok, dan laporan bisnis Anda dengan mudah.">
+    <title>KASTRA - Sistem Kasir Modern</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-dark: #0f172a;          /* Background Gelap (Slate/Blueish Black) */
+            --bg-card: #1e293b;          /* Card Background */
+            --bg-secondary: #334155;     /* Secondary Background */
+            
+            /* Warna Utama KASTRA (Biru) */
+            --primary-blue: #5F85DA;     /* Warna Utama */
+            --primary-blue-hover: #4a6fc2; /* Warna Hover */
+            
+            --text-main: #f1f5f9;        /* Teks Putih */
+            --text-muted: #94a3b8;       /* Teks Abu-abu */
+            
+            /* Gradien Biru */
+            --gradient-blue: linear-gradient(135deg, #5F85DA 0%, #4a6fc2 100%);
+            
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .text-center { text-align: center; }
+        .text-blue { color: var(--primary-blue); } /* Changed from pink */
+        
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+        a { text-decoration: none; }
+
+        /* --- HEADER / NAVBAR --- */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--bg-secondary);
+            backdrop-filter: blur(10px);
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span { color: var(--primary-blue); }
+        
+        /* Tambahkan menu navigasi sederhana */
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: var(--text-muted); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary-blue); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 160px 0 100px 0;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Glow Effect (Blue) */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: var(--primary-blue); /* Changed from pink */
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-text h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        .download-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(95, 133, 218, 0.3); /* Blue shadow */
+        }
+
+        .btn-primary {
+            background: var(--gradient-blue);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-blue); /* Blue border */
+            color: var(--primary-blue); /* Blue text */
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn svg { margin-right: 10px; width: 24px; height: 24px; }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid var(--bg-secondary);
+            animation: float 6s ease-in-out infinite;
+            display: block;
+            margin: 0 auto;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features {
+            padding: 100px 0;
+            background-color: var(--bg-card);
+        }
+
+        .section-title { margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 10px; }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-blue); /* Blue border on hover */
+            transform: translateY(-5px);
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: rgba(95, 133, 218, 0.1); /* Light blue bg */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            color: var(--primary-blue); /* Blue icon */
+        }
+
+        .feature-card h3 { margin-bottom: 15px; font-size: 1.25rem; }
+        .feature-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* --- SHOWCASE / SCREENSHOTS --- */
+        .showcase { padding: 100px 0; }
+
+        .showcase-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 30px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-blue) var(--bg-secondary); /* Blue scrollbar */
+        }
+        
+        .showcase-scroll::-webkit-scrollbar { height: 8px; }
+        .showcase-scroll::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        .showcase-scroll::-webkit-scrollbar-thumb { background-color: var(--primary-blue); border-radius: 4px; }
+
+        .screenshot-item {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 500px;
+            background-color: var(--bg-secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .screenshot-item:hover img { transform: scale(1.05); }
+
+        /* --- DOWNLOAD CTA --- */
+        .cta-section {
+            padding: 100px 0;
+            background: var(--gradient-blue); /* Blue Gradient */
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 20px; color: white; }
+        .cta-section p { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; }
+        
+        .btn-white {
+            background: white;
+            color: var(--primary-blue); /* Blue text */
+        }
+        .btn-white:hover {
+            background: #f0f0f0;
+            color: var(--primary-blue-hover);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #020617; /* Lebih gelap */
+            padding: 50px 0 20px 0;
+            border-top: 1px solid var(--bg-secondary);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 { color: white; margin-bottom: 20px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: var(--text-muted); transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--primary-blue); } /* Blue hover */
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-text p { margin: 0 auto 30px auto; }
+            .download-buttons { justify-content: center; }
+            .hero-image { margin-top: 50px; order: -1; }
+            .hero-image img { width: 80%; max-width: 350px; margin: 0 auto; }
+            h1 { font-size: 2.5rem; }
+            .cta-section h2 { font-size: 2rem; }
+            .nav-links { display: none; } /* Hide nav on mobile */
+        }
+
+        @media (max-width: 480px) {
+            .container { width: 95%; padding: 0 10px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
+            .btn { width: 100%; }
+            .download-buttons { flex-direction: column; width: 100%; }
+            .btn { margin-bottom: 10px; }
+            .hero { padding-top: 120px; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <!-- Ikon Logo SVG -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                    KASTRA
+                </div>
+                <div class="nav-links">
+                    <a href="#features">Fitur</a>
+                    <a href="#download">Download</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Kelola Toko <br><span class="text-blue">Lebih Mudah</span></h1>
+                        <p>Sistem Kasir Modern untuk UMKM. Kelola transaksi, stok batch, dan laporan keuangan dalam satu aplikasi yang simpel dan powerful.</p>
+                        <div class="download-buttons">
+                            <!-- Ganti href dengan link download aplikasi Anda -->
+                            <a href="#" class="btn btn-primary" aria-label="Unduh Aplikasi">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" /></svg>
+                                Unduh Sekarang
+                            </a>
+                            <a href="#features" class="btn btn-outline">
+                                Pelajari Fitur
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <!-- Ganti src dengan gambar mockup aplikasi KASTRA Anda -->
+                        <img src="./apk.png" alt="Tampilan Aplikasi KASTRA di Smartphone">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>Mengapa Memilih <span class="text-blue">KASTRA?</span></h2>
+                    <p>Fitur unggulan yang kami tawarkan untuk kemajuan bisnis Anda.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M7,2V13H10V22L17,10H14L17,2H7Z" /></svg>
+                        </div>
+                        <h3>Kasir Super Cepat</h3>
+                        <p>Antarmuka intuitif dengan dukungan barcode scanner. Proses checkout pelanggan hanya dalam hitungan detik.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L5,8.09V15.91L12,19.85L19,15.91V8.09L12,4.15M12,6.23L16.9,9.06V14.81L12,17.64L7.1,14.81V9.06L12,6.23Z" /></svg>
+                        </div>
+                        <h3>Manajemen Stok Batch</h3>
+                        <p>Pantau kedaluarsa produk dengan metode FEFO. Dapatkan peringatan dini untuk stok yang menipis.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M3,13H5.83L6.77,15.42C6.95,15.77 7.31,16 7.7,16H16.3C16.69,16 17.05,15.77 17.23,15.42L18.17,13H21V11H17.5C17.11,11 16.75,11.23 16.57,11.58L15.64,14H8.36L7.43,11.58C7.25,11.23 6.89,11 6.5,11H3V13M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2Z" /></svg>
+                        </div>
+                        <h3>Laporan Realtime</h3>
+                        <p>Dapatkan insight penjualan harian dan bulanan. Visualisasi grafik yang mudah dipahami.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Download Section -->
+        <section id="download" class="cta-section">
+            <div class="container">
+                <h2>Siap Meningkatkan Bisnis Anda?</h2>
+                <p>Unduh KASTRA sekarang dan rasakan kemudahan mengelola toko.</p>
+                <div class="download-buttons" style="justify-content: center;">
+                    <a href="#" class="btn btn-white">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" /></svg>
+                        Download APK
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo">KASTRA</div>
+                    <p style="margin-top: 15px;">Sistem Kasir Modern untuk UMKM, Warung, Retail, dan Kuliner.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="#hero">Beranda</a></li>
+                        <li><a href="#features">Fitur</a></li>
+                        <li><a href="#download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Email Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 KASTRA. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
