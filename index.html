@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="KASTRA - Sistem Kasir Modern. Kelola transaksi, stok, dan laporan bisnis Anda dengan mudah.">
+    <!-- ========= OPEN GRAPH (WhatsApp, FB, Discord, LinkedIn) ========= -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kastra-app.vercel.app/" />
+    <meta property="og:title" content="Kelola Toko Lebih Mudah dengan KASTRA" />
+    <meta property="og:description" content="KASTRA - Sistem Kasir Modern. Kelola transaksi, stok, dan laporan bisnis Anda dengan mudah." />
+    <meta property="og:image" content="https://kastra-app.vercel.app/OG.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Kastra" />
+    <meta property="og:locale" content="id_ID" />
+
+    <!-- ==================== TWITTER / X CARD ==================== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Kelola Toko Lebih Mudah dengan KASTRA" />
+    <meta name="twitter:description" content="KASTRA - Sistem Kasir Modern. Kelola transaksi, stok, dan laporan bisnis Anda dengan mudah." />
+    <meta name="twitter:image" content="https://kastra-app.vercel.app/OG.png" />
     <title>KASTRA - Sistem Kasir Modern</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,36 +31,29 @@
             --bg-card: #ffffff;
             --bg-secondary: #f1f5f9;
             --bg-tertiary: #e8edf4;
-
             --primary: #4361EE;
             --primary-light: #6B84F3;
             --primary-dark: #3451D1;
             --primary-glow: rgba(67, 97, 238, 0.15);
             --primary-glow-strong: rgba(67, 97, 238, 0.25);
-
             --text-main: #0f172a;
             --text-secondary: #334155;
             --text-muted: #64748b;
             --text-light: #94a3b8;
-
             --border: #e2e8f0;
             --border-light: #f1f5f9;
-
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
             --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
             --shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
             --shadow-xl: 0 20px 50px rgba(0,0,0,0.1);
             --shadow-primary: 0 8px 24px rgba(67, 97, 238, 0.3);
-
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
             --radius-xl: 24px;
             --radius-full: 9999px;
-
             --font: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
         }
-
         /* --- RESET --- */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -58,7 +68,6 @@
         a { text-decoration: none; color: inherit; }
         button { border: none; background: none; cursor: pointer; font-family: inherit; }
         ul { list-style: none; }
-
         /* --- UTILITIES --- */
         .container {
             width: 100%;
@@ -66,7 +75,6 @@
             margin: 0 auto;
             padding: 0 24px;
         }
-
         /* --- SCROLL REVEAL --- */
         .reveal {
             opacity: 0;
@@ -80,7 +88,6 @@
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
-
         /* --- NOISE TEXTURE OVERLAY --- */
         body::after {
             content: '';
@@ -91,9 +98,8 @@
             opacity: 0.025;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
-
         /* ============================================
-           HEADER / NAVBAR
+        HEADER / NAVBAR
         ============================================ */
         header {
             position: fixed;
@@ -132,7 +138,6 @@
             border-radius: var(--radius-sm);
         }
         .logo-text-blue { color: var(--primary); }
-
         .nav-links {
             display: flex;
             align-items: center;
@@ -161,7 +166,6 @@
             color: #fff;
             box-shadow: var(--shadow-primary);
         }
-
         /* Hamburger */
         .hamburger {
             display: none;
@@ -184,7 +188,6 @@
         .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
         /* Mobile Menu */
         .mobile-menu {
             display: none;
@@ -234,9 +237,8 @@
             background: var(--primary-dark);
             color: #fff;
         }
-
         /* ============================================
-           HERO SECTION
+        HERO SECTION
         ============================================ */
         .hero {
             position: relative;
@@ -246,7 +248,6 @@
             align-items: center;
             overflow: hidden;
         }
-
         /* Decorative background elements */
         .hero-deco {
             position: absolute;
@@ -284,7 +285,6 @@
             background-size: 24px 24px;
             opacity: 0.7;
         }
-
         .hero-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -293,7 +293,6 @@
             position: relative;
             z-index: 1;
         }
-
         .hero-badge {
             display: inline-flex;
             align-items: center;
